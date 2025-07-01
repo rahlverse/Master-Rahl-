@@ -6,7 +6,16 @@
   <title>Rahlverse Empire</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins&display=swap" rel="stylesheet">
   <style>
-    body {
+    body {<!-- Hamburger Icon -->
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+
+<!-- Sidebar Menu -->
+<div class="side-menu" id="sideMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="generator.html">🧠 RAHL Generator</a>
+  <a href="chat.html">🤖 RAHL Chat</a>
+  <a href="#" onclick="logout()">🚪 Logout</a>
+</div>
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
