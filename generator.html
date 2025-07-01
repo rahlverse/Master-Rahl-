@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RAHL Launchpad | Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Generate Bio, Caption, or Button Code</h2>
+
+  <select id="generatorType">
+    <option value="bio">🔥 Bio</option>
+    <option value="caption">✍️ Caption</option>
+    <option value="button">🔘 Button Code (HTML)</option>
+  </select>
+
+  <input type="text" id="inputText" placeholder="Enter a name, idea or phrase" />
+
+  <button onclick="generateOutput()">Generate</button>
+
+  <pre id="outputBox"></pre>
+
+  <script>
+    function generateOutput() {
+      const type = document.getElementById('generatorType').value;
+      const input = document.getElementById('inputText').value.trim();
+      let output = '';
+
+      if (!input) {
+        output = "Please enter something to generate.";
+      } else {
+        if (type === 'bio') {
+          output = `👤 ${input} is a creative force driven by vision, passion, and purpose.`;
+        } else if (type === 'caption') {
+          output = `📸 "${input}" — #Vibes #CreateMore #RahlVerse`;
+        } else if (type === 'button') {
+          output = `<button style="padding:10px 20px;background:#e91e63;color:white;border:none;">${input}</button>`;
+        }
+      }
+
+      document.getElementById('outputBox').textContent = output;
+    }
+  </script>
+</body>
+</html>
