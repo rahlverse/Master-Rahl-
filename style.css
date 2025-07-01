@@ -1,0 +1,60 @@
+/* RAHL LAUNCHPAD - STYLE SHEET */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0e0e0e;
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #e91e63;
+}
+
+input, select {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #e91e63;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #c2185b;
+}
+
+pre {
+  background: #1c1c1c;
+  padding: 15px;
+  border-radius: 8px;
+  color: #00ffcc;
+  margin-top: 20px;
+  overflow-x: auto;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+}
+
+a {
+  color: #80d8ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
