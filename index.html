@@ -1,20 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>RAHL LAUNCHPAD | Login</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rahlverse Empire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      color: crimson;
+      margin-bottom: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .enter-btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background: crimson;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 20px crimson;
+    }
+
+    .enter-btn:hover {
+      background: #ff2f68;
+      box-shadow: 0 0 30px #ff2f68;
+    }
+
+    .slogan {
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+      font-size: 1rem;
+      background: #111;
+      border-top: 1px solid crimson;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .enter-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Login to Rahl Launchpad</h2>
 
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Enter Email" required />
-    <input type="password" id="password" placeholder="Enter Password" required />
-    <button type="submit">Login</button>
-  </form>
+  <div class="container">
+    <h1>Welcome to Rahlverse Empire</h1>
+    <button class="enter-btn" onclick="location.href='dashboard.html'">Enter the Empire</button>
+  </div>
 
-  <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+  <div class="slogan">
+    Power through knowledge. Control through code.
+  </div>
 
-  <script type="module" src="app.js"></script>
 </body>
 </html>
