@@ -1,3 +1,4 @@
+// Firebase configuration for Rahlverse Empire
 const firebaseConfig = {
   apiKey: "AIzaSyD6bvr1VsG2vhVFwT3pmAtcIvadrAlIO7Y",
   authDomain: "rahlverse-empire.firebaseapp.com",
@@ -8,5 +9,5 @@ const firebaseConfig = {
   measurementId: "G-2K024KSR5M"
 };
 
-// ✅ Export it like this:
+// Export to be used in other modules (optional)
 export { firebaseConfig };
