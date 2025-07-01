@@ -86,7 +86,7 @@
     <div class="chat-input">
       <input type="text" id="userInput" placeholder="Type or speak..." />
       <button class="send-btn" onclick="sendMessage()">Send</button>
-      <button class="mic-btn" onclick="startListening()">🎤 Speak</button>
+      <button class="mic-btn" onclick="startListening()">🎤 Mic</button>
     </div>
   </div>
 
@@ -128,19 +128,33 @@
     }
 
     function startListening() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'en-US';
-      recognition.start();
+      try {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+          alert("Speech Recognition not supported on this device.");
+          return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.start();
 
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("userInput").value = transcript;
-        sendMessage();
-      };
+        recognition.onstart = function () {
+          console.log("Voice recognition started.");
+        };
 
-      recognition.onerror = function() {
-        alert("Voice recognition failed or is not supported in this browser.");
-      };
+        recognition.onresult = function(event) {
+          const transcript = event.results[0][0].transcript;
+          document.getElementById("userInput").value = transcript;
+          sendMessage();
+        };
+
+        recognition.onerror = function(event) {
+          console.error("Speech recognition error:", event.error);
+          alert("Mic error or permission denied.");
+        };
+      } catch (err) {
+        alert("Voice feature failed: " + err.message);
+      }
     }
   </script>
 </body>
