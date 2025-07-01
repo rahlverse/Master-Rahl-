@@ -167,3 +167,81 @@
       }</script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAHL Bot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div class="side-menu" id="sideMenu">
+    <a href="index.html">🏠 Home</a>
+    <a href="generator.html">🧠 Generator</a>
+    <a href="chat.html">🤖 RAHL Chat</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </div>
+
+  <!-- Chat Interface -->
+  <div class="main-content">
+    <h1 style="color: gold;">RAHL AI Assistant</h1>
+    <div id="chatBox" class="chat-box"></div>
+
+    <input type="text" id="userInput" placeholder="Ask RAHL anything..." />
+    <button onclick="sendToRahl()">Send</button>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      menu.style.left = (menu.style.left === '0px') ? '-250px' : '0px';
+    }
+
+    function logout() {
+      if (firebase?.auth) {
+        firebase.auth().signOut().then(() => {
+          window.location.href = "login.html";
+        });
+      }
+    }
+
+    function sendToRahl() {
+      const input = document.getElementById("userInput");
+      const chatBox = document.getElementById("chatBox");
+      const message = input.value.trim();
+
+      if (message === "") return;
+
+      chatBox.innerHTML += `<div class="user-msg">👤 You: ${message}</div>`;
+
+      // Dummy RAHL reply (we’ll connect AI later)
+      let rahlReply = generateRahlResponse(message);
+      chatBox.innerHTML += `<div class="bot-msg">🤖 RAHL: ${rahlReply}</div>`;
+
+      speak(rahlReply);
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function generateRahlResponse(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("fashion bio")) return "A fashion bio is a creative force driven by vision, passion, and purpose.";
+      if (msg.includes("hi") || msg.includes("hello")) return "Greetings, I am RAHL — Royal Artificial Hyperintelligent Linguist.";
+      return "I am still learning, but I will serve you with knowledge and code.";
+    }
+
+    function speak(text) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = "en-US";
+      speech.rate = 1;
+      speechSynthesis.speak(speech);
+    }
+  </script>
+
+</body>
+</html>
