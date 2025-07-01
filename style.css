@@ -93,3 +93,50 @@ a:hover {
 .side-menu a:hover {
   background: #222;
 }
+.chat-box {
+  background: #111;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 700px;
+  height: 300px;
+  overflow-y: auto;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px gold;
+}
+
+.user-msg, .bot-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.user-msg {
+  background: #222;
+  color: #fff;
+}
+
+.bot-msg {
+  background: #333;
+  color: gold;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 20px;
+  margin-left: 10px;
+  background: gold;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
