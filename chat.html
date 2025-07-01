@@ -6,6 +6,11 @@
   <title>Rahl Bot – Your AI Assistant</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      background: #0c0c0c;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
     .chat-container {
       max-width: 500px;
       margin: 40px auto;
@@ -42,6 +47,10 @@
       color: white;
       cursor: pointer;
     }
+    h2 {
+      color: crimson;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -72,10 +81,24 @@
     }
 
     function getReply(msg) {
-      if (msg.includes("bio")) return "Here's a powerful bio: I'm a visionary rising through code and chaos.";
-      if (msg.includes("upload")) return "To upload your notes, go to the Upload page.";
-      if (msg.includes("love")) return "Love is a distraction, Emperor. Focus builds empires.";
-      if (msg.includes("hello") || msg.includes("hi")) return "Greetings. How may I assist your conquest?";
+      if (msg.includes("fashion bio")) {
+        return "A creative force driven by vision, passion, and purpose — reshaping trends, commanding presence, and crafting stories through every thread.";
+      }
+      if (msg.includes("business bio")) {
+        return "A bold strategist turning ideas into impact. I build, lead, and dominate with purpose.";
+      }
+      if (msg.includes("upload")) {
+        return "To upload your notes, go to the Upload page. PDF magic awaits.";
+      }
+      if (msg.includes("love")) {
+        return "Love is a distraction, Emperor. Focus builds empires.";
+      }
+      if (msg.includes("hello") || msg.includes("hi")) {
+        return "Greetings. How may I assist your conquest?";
+      }
+      if (msg.includes("bio")) {
+        return "Here's a powerful bio: I'm a visionary rising through code and chaos.";
+      }
       return "That request is noted. In the future, I’ll respond with greater power.";
     }
   </script>
