@@ -6,61 +6,99 @@
   <title>RAHL Generator</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .mic-button {
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding-top: 60px;
+      text-align: center;
+      color: white;
+    }
+
+    select, input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background-color: gold;
+      color: black;
+      cursor: pointer;
+    }
+
+    .mic {
+      font-size: 20px;
+      color: crimson;
+      cursor: pointer;
+      margin-left: 10px;
       background: none;
       border: none;
-      cursor: pointer;
-      font-size: 24px;
-      color: gold;
-      margin-left: 8px;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+      color: aqua;
+    }
+
+    body {
+      background-color: #111;
+      font-family: 'Segoe UI', sans-serif;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2 style="color: crimson;">Generate Bio, Caption, or Button Code</h2>
+<div class="container">
+  <h2 style="color: crimson;">Generate Bio, Caption, or Button Code</h2>
 
-    <select id="typeSelect">
-      <option value="bio">🔥 Bio</option>
-      <option value="caption">🎯 Caption</option>
-      <option value="button">🔘 Button Code</option>
-    </select>
+  <select id="typeSelect">
+    <option value="bio">🔥 Bio</option>
+    <option value="caption">🎯 Caption</option>
+    <option value="button">🔘 Button</option>
+  </select>
 
-    <div style="margin-top: 10px; display: flex; align-items: center;">
-      <input type="text" id="userInput" placeholder="Type your idea..." />
-      <button onclick="generateText()">Generate</button>
-      <button class="mic-button" onclick="startVoice()">🎙️</button>
-    </div>
-
-    <div id="output" style="margin-top: 20px; color: aqua;"></div>
+  <div style="display:flex; justify-content:center; align-items:center;">
+    <input type="text" id="userInput" placeholder="Type your idea..." />
+    <button onclick="generateText()">Generate</button>
+    <button class="mic" onclick="startVoice()">🎤</button>
   </div>
 
-  <script>
-    function generateText() {
-      const type = document.getElementById("typeSelect").value;
-      const input = document.getElementById("userInput").value.trim().toLowerCase();
-      let output = "";
+  <div id="output"></div>
+</div>
 
+<script>
+  function generateText() {
+    const type = document.getElementById("typeSelect").value;
+    const input = document.getElementById("userInput").value.trim().toLowerCase();
+    let output = "";
+
+    if (!input) {
+      output = "Please enter something to generate.";
+    } else {
       if (type === "bio") {
         if (input.includes("fashion")) {
-          output = "A fashion bio is a creative force driven by vision, passion, and purpose.";
+          output = "👗 A fashion icon driven by style, passion, and purpose.";
         } else if (input.includes("tech")) {
-          output = "A tech visionary fueled by logic, curiosity, and clean code.";
+          output = "💻 A tech innovator powered by code, vision, and clarity.";
         } else {
-          output = `A creative bio about "${input}" — powered by RAHL.`;
+          output = `💡 ${input} is a creative force driven by purpose and energy.`;
         }
       } else if (type === "caption") {
-        output = `Unleashing power through "${input}" #RAHLMode`;
+        output = `🔥 "${input}" — Unleashed by RAHL.`;
       } else if (type === "button") {
         output = `<button class="btn">${input}</button>`;
       }
-
-      document.getElementById("output").innerHTML = "🧠 " + output;
     }
 
-    function startVoice() {
-      const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+    document.getElementById("output").innerHTML = output;
+  }
+
+  function startVoice() {
+    try {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'en-US';
       recognition.start();
 
@@ -72,8 +110,11 @@
       recognition.onerror = function(event) {
         alert("Voice input error: " + event.error);
       };
+    } catch (error) {
+      alert("Your browser does not support voice recognition.");
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
