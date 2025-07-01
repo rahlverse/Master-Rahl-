@@ -1,44 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>RAHL Launchpad | Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAHL Generator</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .mic-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: gold;
+      margin-left: 8px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Generate Bio, Caption, or Button Code</h2>
 
-  <select id="generatorType">
-    <option value="bio">🔥 Bio</option>
-    <option value="caption">✍️ Caption</option>
-    <option value="button">🔘 Button Code (HTML)</option>
-  </select>
+  <div class="container">
+    <h2 style="color: crimson;">Generate Bio, Caption, or Button Code</h2>
 
-  <input type="text" id="inputText" placeholder="Enter a name, idea or phrase" />
+    <select id="typeSelect">
+      <option value="bio">🔥 Bio</option>
+      <option value="caption">🎯 Caption</option>
+      <option value="button">🔘 Button Code</option>
+    </select>
 
-  <button onclick="generateOutput()">Generate</button>
+    <div style="margin-top: 10px; display: flex; align-items: center;">
+      <input type="text" id="userInput" placeholder="Type your idea..." />
+      <button onclick="generateText()">Generate</button>
+      <button class="mic-button" onclick="startVoice()">🎙️</button>
+    </div>
 
-  <pre id="outputBox"></pre>
+    <div id="output" style="margin-top: 20px; color: aqua;"></div>
+  </div>
 
   <script>
-    function generateOutput() {
-      const type = document.getElementById('generatorType').value;
-      const input = document.getElementById('inputText').value.trim();
-      let output = '';
+    function generateText() {
+      const type = document.getElementById("typeSelect").value;
+      const input = document.getElementById("userInput").value.trim().toLowerCase();
+      let output = "";
 
-      if (!input) {
-        output = "Please enter something to generate.";
-      } else {
-        if (type === 'bio') {
-          output = `👤 ${input} is a creative force driven by vision, passion, and purpose.`;
-        } else if (type === 'caption') {
-          output = `📸 "${input}" — #Vibes #CreateMore #RahlVerse`;
-        } else if (type === 'button') {
-          output = `<button style="padding:10px 20px;background:#e91e63;color:white;border:none;">${input}</button>`;
+      if (type === "bio") {
+        if (input.includes("fashion")) {
+          output = "A fashion bio is a creative force driven by vision, passion, and purpose.";
+        } else if (input.includes("tech")) {
+          output = "A tech visionary fueled by logic, curiosity, and clean code.";
+        } else {
+          output = `A creative bio about "${input}" — powered by RAHL.`;
         }
+      } else if (type === "caption") {
+        output = `Unleashing power through "${input}" #RAHLMode`;
+      } else if (type === "button") {
+        output = `<button class="btn">${input}</button>`;
       }
 
-      document.getElementById('outputBox').textContent = output;
+      document.getElementById("output").innerHTML = "🧠 " + output;
+    }
+
+    function startVoice() {
+      const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const result = event.results[0][0].transcript;
+        document.getElementById("userInput").value = result;
+      };
+
+      recognition.onerror = function(event) {
+        alert("Voice input error: " + event.error);
+      };
     }
   </script>
+
 </body>
 </html>
