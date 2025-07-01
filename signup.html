@@ -1,20 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>RAHL LAUNCHPAD | Signup</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup – Rahlverse Empire</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Create Your Account</h2>
+  <div class="container">
+    <h2>Create Your Rahlverse Account 👑</h2>
+    <form id="signupForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
 
-  <form id="signupForm">
-    <input type="email" id="email" placeholder="Enter Email" required />
-    <input type="password" id="password" placeholder="Create Password" required />
-    <button type="submit">Sign Up</button>
-  </form>
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+    <p>If your email is already registered, we’ll redirect you.</p>
+  </div>
 
-  <p>Already have an account? <a href="index.html">Login here</a></p>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-  <script type="module" src="app.js"></script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6bvr1VsG2vhVFwT3pmAtcIvadrAlIO7Y",
+      authDomain: "rahlverse-empire.firebaseapp.com",
+      projectId: "rahlverse-empire",
+      storageBucket: "rahlverse-empire.appspot.com",
+      messagingSenderId: "519945468450",
+      appId: "1:519945468450:web:789cdf8830bc31e83ba87b",
+      measurementId: "G-2K024KSR5M"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Signup successful. Welcome to the Empire!");
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          if (error.code === 'auth/email-already-in-use') {
+            alert("This email is already registered. Redirecting to login...");
+            window.location.href = "index.html";
+          } else {
+            alert("Signup failed: " + error.message);
+          }
+        });
+    });
+  </script>
 </body>
 </html>
