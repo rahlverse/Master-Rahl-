@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rahl Bot – Your AI Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .chat-container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #111;
+      color: #eee;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    }
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #000;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+    }
+    input {
+      flex: 1;
+    }
+    button {
+      background: crimson;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>🤖 Rahl Bot</h2>
+    <div class="chat-box" id="chatBox">
+      <p><strong>Rahl Bot:</strong> Hello, Emperor. What do you seek?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Ask me anything..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      const box = document.getElementById("chatBox");
+
+      if (message) {
+        box.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+        const reply = getReply(message.toLowerCase());
+        box.innerHTML += `<p><strong>Rahl Bot:</strong> ${reply}</p>`;
+        input.value = "";
+        box.scrollTop = box.scrollHeight;
+      }
+    }
+
+    function getReply(msg) {
+      if (msg.includes("bio")) return "Here's a powerful bio: I'm a visionary rising through code and chaos.";
+      if (msg.includes("upload")) return "To upload your notes, go to the Upload page.";
+      if (msg.includes("love")) return "Love is a distraction, Emperor. Focus builds empires.";
+      if (msg.includes("hello") || msg.includes("hi")) return "Greetings. How may I assist your conquest?";
+      return "That request is noted. In the future, I’ll respond with greater power.";
+    }
+  </script>
+</body>
+</html>
