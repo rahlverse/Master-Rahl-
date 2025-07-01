@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- ☰ RAHL Hamburger -->
+  <!-- Hamburger -->
   <div class="hamburger" onclick="toggleMenu()">☰</div>
 
   <!-- Side Menu -->
@@ -19,7 +19,7 @@
     <a href="#" onclick="logout()">🚪 Logout</a>
   </div>
 
-  <!-- RAHL Terminal -->
+  <!-- Chat Interface -->
   <div class="main-content">
     <h1 style="color: gold;">RAHL — Royal AI Assistant</h1>
     <div id="chatBox" class="chat-box"></div>
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <!-- JS Logic -->
+  <!-- JavaScript -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById('sideMenu');
@@ -38,7 +38,7 @@
     }
 
     function logout() {
-      if (firebase?.auth) {
+      if (typeof firebase !== "undefined" && firebase.auth) {
         firebase.auth().signOut().then(() => {
           window.location.href = "login.html";
         });
@@ -52,10 +52,8 @@
 
       if (!message) return;
 
-      // Display user message
       chatBox.innerHTML += `<div class="user-msg">👤 You: ${message}</div>`;
 
-      // Generate RAHL reply
       const rahlReply = generateRahlResponse(message);
       chatBox.innerHTML += `<div class="bot-msg">🤖 RAHL: ${rahlReply}</div>`;
 
@@ -64,23 +62,23 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function generateRahlResponse(msg) {
-      const cleaned = msg.toLowerCase().trim();
+    function generateRahlResponse(message) {
+      const text = message.toLowerCase().trim();
 
-      if (cleaned.includes("fashion bio")) {
+      if (text.includes("fashion bio")) {
         return "A fashion bio is a creative force driven by vision, passion, and purpose.";
       }
 
-      if (cleaned.includes("hello") || cleaned.includes("hi") || cleaned.includes("hey")) {
+      if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
         return "Greetings, I am RAHL — Royal Artificial Hyperintelligent Linguist. How can I serve you?";
       }
 
-      if (cleaned.includes("who created you")) {
-        return "I was brought to life by Emperor Rahl, master of code and vision.";
+      if (text.includes("who created you")) {
+        return "I was created by Emperor Rahl, master of the code realm.";
       }
 
-      if (cleaned.includes("what can you do")) {
-        return "I can chat, generate bios, guide you in code, and will soon evolve with real AI power.";
+      if (text.includes("what can you do")) {
+        return "I can chat, generate bios, and soon evolve to full AI intelligence.";
       }
 
       return "I am still learning. But I will serve you with knowledge and code.";
