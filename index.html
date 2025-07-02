@@ -1,136 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>👑 RAHL Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAHL Launchpad</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #0f0f0f, #1a1a1a);
-      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1e1f2f, #3b1f47);
+      color: white;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: gold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: gold;
+    }
+    .hero-section {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       text-align: center;
+      padding: 4rem 1rem;
     }
-
-    .login-box {
-      background: #111;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-      width: 90%;
-      max-width: 400px;
-    }
-
-    .login-box h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
+    .hero-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
       color: gold;
     }
-
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      background: #222;
-      color: #fff;
+    .hero-content p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
     }
-
-    .login-box button {
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
       background-color: gold;
-      color: #111;
+      color: #1e1f2f;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 25px;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .login-box button:hover {
-      background-color: #ffcc00;
-    }
-
-    .typing {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 10px;
-      min-height: 20px;
-    }
-
-    .profile-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') no-repeat center;
-      background-size: cover;
-      margin: 0 auto 20px;
-      border: 2px solid gold;
-    }
-
-    .slogan {
-      margin-top: 40px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    a {
-      color: gold;
       text-decoration: none;
-      display: inline-block;
-      margin-top: 15px;
+      transition: background-color 0.3s;
     }
-
-    a:hover {
-      text-decoration: underline;
+    .btn:hover {
+      background-color: #f7d774;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #111;
+    }
+    .slogan {
+      font-style: italic;
+      color: #ccc;
+    }
+    .powered {
+      font-size: 0.9rem;
+      color: #777;
     }
   </style>
-</head>
-<body>
-
-  <div class="login-box">
-    <div class="profile-icon"></div>
-    <h2>Welcome to RAHL</h2>
-    <p class="typing" id="typingText"></p>
-
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Enter your email" required>
-      <input type="password" id="password" placeholder="Enter password" required>
-      <button type="submit">Login</button>
-    </form>
-
-    <a href="signup.html">Create new account</a>
-  </div>
-
-  <div class="slogan">👑 A creative force driven by vision, passion, and purpose — Powered by RAHL.</div>
-
-  <script>
-    // Typing animation for slogan
-    const text = "“A creative force driven by vision, passion, and purpose.”";
-    let i = 0;
-    const speed = 50;
-    const typingEl = document.getElementById("typingText");
-
-    function typeWriter() {
-      if (i < text.length) {
-        typingEl.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-      }
-    }
-
-    typeWriter();
-  </script>
-
-  <script type="module" src="app.js"></script>
-</body>
-</html>
+</head><body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">👑 RAHL</h1>
+      <ul class="nav-links">
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>  <main class="hero-section">
+    <div class="hero-content">
+      <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
+      <p>Your personalized gateway to innovation, automation, and creative freedom.</p>
+      <div class="hero-buttons">
+        <a class="btn" href="generator.html">Open Generator</a>
+        <a class="btn" href="logout.html">Log Out</a>
+      </div>
+    </div>
+  </main>  <footer>
+    <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
+    <p class="powered">Powered by RAHL</p>
+  </footer>
+</body></html>
