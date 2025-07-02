@@ -3,97 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rahlverse Empire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins&display=swap" rel="stylesheet">
+  <title>RAHL Launchpad</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    body {<!-- Hamburger Icon -->
-<div class="hamburger" onclick="toggleMenu()">☰</div>
-
-<!-- Sidebar Menu -->
-<div class="side-menu" id="sideMenu">
-  <a href="index.html">🏠 Home</a>
-  <a href="generator.html">🧠 RAHL Generator</a>
-  <a href="chat.html">🤖 RAHL Chat</a>
-  <a href="#" onclick="logout()">🚪 Logout</a>
-</div>
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(145deg, #0c0c0c, #1a1a1a);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .container {
-      flex: 1;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #2c003e, #000);
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 100vh;
       text-align: center;
-      padding: 20px;
     }
 
     h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.8rem;
-      color: crimson;
+      font-size: 3em;
+      color: gold;
       margin-bottom: 10px;
-      letter-spacing: 1.5px;
     }
 
-    .enter-btn {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 1.1rem;
+    .typing {
+      font-size: 1.3em;
+      color: #ccc;
+      height: 30px;
+      margin-bottom: 30px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button {
+      background: gold;
+      color: #000;
       font-weight: bold;
       border: none;
-      border-radius: 12px;
-      background: crimson;
-      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1em;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 0 20px crimson;
+      transition: background 0.3s, transform 0.2s;
     }
 
-    .enter-btn:hover {
-      background: #ff2f68;
-      box-shadow: 0 0 30px #ff2f68;
+    button:hover {
+      background: #ffdd57;
+      transform: scale(1.05);
     }
 
-    .slogan {
-      text-align: center;
-      padding: 20px;
-      font-style: italic;
-      font-size: 1rem;
-      background: #111;
-      border-top: 1px solid crimson;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .enter-btn {
-        padding: 12px 24px;
-        font-size: 1rem;
-      }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #999;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Welcome to Rahlverse Empire</h1>
-    <button class="enter-btn" onclick="location.href='dashboard.html'">Enter the Empire</button>
+  <h1>👑 RAHL Launchpad</h1>
+  <div class="typing" id="slogan"></div>
+
+  <div class="button-group">
+    <a href="signup.html"><button>Sign Up</button></a>
+    <a href="index.html"><button>Login</button></a>
+    <a href="generator.html"><button>Launch Generator</button></a>
   </div>
 
-  <div class="slogan">
+  <footer>
     Power through knowledge. Control through code.
-  </div>
+  </footer>
 
+  <script>
+    const text = "Power through knowledge. Control through code.";
+    let index = 0;
+    const speed = 70;
+    const slogan = document.getElementById("slogan");
+
+    function type() {
+      if (index < text.length) {
+        slogan.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      }
+    }
+    type();
+  </script>
 </body>
 </html>
