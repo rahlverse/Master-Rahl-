@@ -1,28 +1,74 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAHL Dashboard</title>
+  <title>Dashboard | RAHL Launchpad</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
+  <style>
+    .dashboard-container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: #111;
+      padding: 40px;
+      color: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .dashboard-container h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-buttons a {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 15px;
+      background: royalblue;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .dashboard-buttons a:hover {
+      background: #4169e1;
+    }
+
+    .royal-frame {
+      border: 3px solid royalblue;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      margin: 20px auto;
+      background-image: url('profile.png'); /* Optional future user profile */
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
-<body style="margin: 0; font-family: 'Segoe UI', sans-serif; background: #0c0c0c; color: white;">
 
-  <!-- Royal Header -->
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: linear-gradient(to right, #1a1a1a, #333);">
-    <h2 style="margin: 0;">👑 RAHL Dashboard</h2>
-    <img src="https://i.ibb.co/S0RkMTh/profile-icon.png" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;" />
-  </header>
+<body>
+  <div class="dashboard-container">
+    <h2>👑 Welcome to Your Royal Dashboard</h2>
 
-  <!-- Bot Response Section -->
-  <main style="padding: 20px;">
-    <h3>Talk to RAHL</h3>
-    <input id="userInput" type="text" placeholder="Ask RAHL anything..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
-    <button onclick="handleQuestion()" style="padding: 10px 20px; border-radius: 6px; background: royalblue; color: white; border: none; cursor: pointer;">Ask RAHL</button>
+    <div class="royal-frame"></div>
 
-    <div id="response" style="margin-top: 20px; font-style: italic;"></div>
-  </main>
+    <div class="dashboard-buttons">
+      <a href="generator.html">Open Generator</a>
+      <a href="index.html">Log Out</a>
+    </div>
 
-  <script src="openai.js"></script>
+    <p class="powered">Powered by RAHL</p>
+  </div>
+
+  <script>
+    // Optional future user data fetch
+    console.log("Dashboard loaded.");
+  </script>
 </body>
 </html>
