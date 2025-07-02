@@ -7,84 +7,91 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1b1b2f, #162447);
-      color: #fff;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      gap: 15px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .top-bar button {
-      background-color: #6a1b9a;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .top-bar button:hover {
-      background-color: #9c27b0;
-    }
-
-    .center-box {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
       text-align: center;
-      margin-top: 15vh;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 10px;
     }
 
-    p {
-      font-size: 1.2rem;
-      color: #ccc;
+    p#userEmail {
+      color: #cccccc;
       margin-bottom: 30px;
     }
 
-    .slogan {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-style: italic;
-      color: #bbb;
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    button {
+      background: #8a2be2;
+      color: white;
+      padding: 14px 30px;
       font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #a45de0;
+      transform: scale(1.05);
+    }
+
+    #logoutBtn {
+      background: #ff4d4d;
+    }
+
+    #logoutBtn:hover {
+      background: #e63946;
     }
   </style>
 </head>
 <body>
-  <div class="top-bar">
-    <button onclick="window.location.href='generator.html'">Open Generator</button>
-    <button onclick="logout()">Logout</button>
+
+  <h1>Welcome to the RAHLverse 👑</h1>
+  <p id="userEmail">Loading your profile...</p>
+
+  <div class="button-group">
+    <button onclick="location.href='generator.html'">Open Generator</button>
+    <button onclick="location.href='chat.html'">Talk to RAHL</button>
+    <button id="logoutBtn">Logout</button>
   </div>
 
-  <div class="center-box">
-    <h1>Welcome to RAHL Launchpad</h1>
-    <p>The Empire Begins Here</p>
-  </div>
+  <script type="module">
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { app } from "./firebase-config.js";
 
-  <div class="slogan">
-    Power Through Knowledge. Control Through Code.
-  </div>
+    const auth = getAuth(app);
+    const userEmail = document.getElementById("userEmail");
 
-  <script>
-    function logout() {
-      // Clear Firebase auth session
-      localStorage.clear();
-      sessionStorage.clear();
-      window.location.href = "index.html";
-    }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userEmail.textContent = `Logged in as: ${user.email}`;
+      } else {
+        window.location.href = "index.html"; // Redirect if not logged in
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    });
   </script>
+
 </body>
 </html>
