@@ -1,4 +1,4 @@
-// openai.js
+const apiKey = OPENAI_API_KEY; // Make sure this is stored in Vercel as env variable
 
 async function askRAHL(question) {
   try {
@@ -6,8 +6,7 @@ async function askRAHL(question) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Uses the environment variable from Vercel
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
@@ -17,15 +16,24 @@ async function askRAHL(question) {
     });
 
     const data = await response.json();
+    const answer = data.choices?.[0]?.message?.content || "RAHL has no response.";
 
-    if (!data.choices || !data.choices.length) {
-      throw new Error("No response from RAHL.");
-    }
-
-    return data.choices[0].message.content;
+    document.getElementById("response").innerText = answer;
+    speakResponse(answer); // Speak it
   } catch (error) {
-    return `An error occurred: ${error.message}`;
+    document.getElementById("response").innerText = `An error occurred: ${error.message}`;
   }
 }
 
-export { askRAHL };
+function handleQuestion() {
+  const question = document.getElementById("userInput").value;
+  askRAHL(question);
+}
+
+function speakResponse(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "en-US";
+  speech.rate = 1;
+  speech.pitch = 1.2;
+  window.speechSynthesis.speak(speech);
+}
