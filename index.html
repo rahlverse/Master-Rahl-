@@ -1,75 +1,112 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAHL - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAHL Launchpad</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
   <style>
+    /* Minimal CSS for royalty and structure */
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #0c0c0c;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
       color: #fff;
-    }
-
-    .hero {
-      height: 100vh;
-      background: url('media/rahl-poster.jpg') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
+      min-height: 100vh;
+    }.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
-    .hero h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(to right, gold, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
+.logo {
+  font-size: 1.8rem;
+  color: gold;
+  font-weight: bold;
+}
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      max-width: 600px;
-      margin-bottom: 30px;
-    }
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
 
-    .btns {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
 
-    .btns a {
-      background: royalblue;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+.hero-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
 
-    .btns a:hover {
-      background: goldenrod;
-    }
+.hero-section img {
+  max-width: 300px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.hero-buttons {
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: gold;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ccc;
+}
+
   </style>
-</head>
-<body>
-  <div class="hero">
-    <h1>👑 RAHL INTELLIGENCE SYSTEM</h1>
-    <p><em>Control through KNOWledge. Power through CODE.</em></p>
-    <div class="btns">
-      <a href="signup.html">Join the Launch</a>
-      <a href="login.html">Login</a>
-      <a href="dashboard.html">Dashboard</a>
+</head><body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">👑 RAHL</h1>
+      <ul class="nav-links">
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="index.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>  <main class="hero-section">
+    <img src="emperor.jpg" alt="Emperor of RAHL" />
+    <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
+    <p>Your gateway to innovation, automation, and creative power.</p>
+    <div class="hero-buttons">
+      <a class="btn" href="generator.html">Open Generator</a>
+      <a class="btn" href="logout.html">Log Out</a>
     </div>
-  </div>
-</body>
-</html>
+  </main>  <footer>
+    <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
+    <p class="powered">Powered by RAHL</p>
+  </footer>
+</body></html>
