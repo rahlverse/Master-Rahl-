@@ -1,14 +1,12 @@
 // openai.js
 
-const apiKey = process.env.OPENAI_API_KEY;
-
 async function askRAHL(question) {
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, // secure variable
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
@@ -27,4 +25,4 @@ async function askRAHL(question) {
   } catch (error) {
     return `An error occurred: ${error.message}`;
   }
-}
+        }
