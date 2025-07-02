@@ -2,15 +2,19 @@
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Only POST allowed" });
+    return res.status(405).json({ error: "Only POST requests allowed" });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
 
-  const { prompt } = req.body;
+  if (!apiKey) {
+    return res.status(500).json({ error: "API key not found in environment variables" });
+  }
+
+  const { message } = req.body;
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,15 +22,20 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt }],
+        messages: [{ role: "user", content: message }],
         temperature: 0.8,
       }),
     });
 
-    const data = await response.json();
-    res.status(200).json({ result: data.choices?.[0]?.message?.content || "No response" });
+    const data = await openaiRes.json();
 
-  } catch (error) {
-    res.status(500).json({ message: error.message || "Something went wrong" });
+    if (data.error) {
+      return res.status(500).json({ error: data.error.message });
+    }
+
+    const reply = data.choices?.[0]?.message?.content || "RAHL could not respond.";
+    return res.status(200).json({ reply });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
   }
 }
