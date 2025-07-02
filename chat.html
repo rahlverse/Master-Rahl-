@@ -3,95 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAHL AI Assistant</title>
+  <title>Talk to RAHL 👑</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 1.8rem;
+    }
+
+    #chatBox {
+      width: 100%;
+      max-width: 700px;
+      background: #1e1e2f;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      overflow-y: auto;
+      max-height: 50vh;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px;
+      background-color: #2e2e4d;
+      border-radius: 8px;
+    }
+
+    .user {
+      text-align: right;
+      color: #7de2d1;
+    }
+
+    .rahl {
+      text-align: left;
+      color: #f7a1f7;
+    }
+
+    #inputArea {
+      display: flex;
+      width: 100%;
+      max-width: 700px;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #8a2be2;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a060f0;
+    }
+
+    #micBtn {
+      font-size: 1.2rem;
+      background-color: #333;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Hamburger -->
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <h1>RAHL is listening 👑</h1>
+  <div id="chatBox"></div>
 
-  <!-- Side Menu -->
-  <div class="side-menu" id="sideMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="generator.html">🧠 Generator</a>
-    <a href="chat.html">🤖 RAHL Chat</a>
-    <a href="#" onclick="logout()">🚪 Logout</a>
+  <div id="inputArea">
+    <input type="text" id="userInput" placeholder="Ask RAHL anything..." />
+    <button onclick="sendMessage()">Send</button>
+    <button id="micBtn">🎤</button>
   </div>
 
-  <!-- Chat Interface -->
-  <div class="main-content">
-    <h1 style="color: gold;">RAHL — Royal AI Assistant</h1>
-    <div id="chatBox" class="chat-box"></div>
-
-    <div style="margin-top: 20px;">
-      <input type="text" id="userInput" placeholder="Ask RAHL anything..." />
-      <button onclick="sendToRahl()">Send</button>
-    </div>
-  </div>
-
-  <!-- JavaScript -->
+  <script src="openai.js"></script>
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('sideMenu');
-      menu.style.left = (menu.style.left === '0px') ? '-250px' : '0px';
-    }
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+    const micBtn = document.getElementById("micBtn");
 
-    function logout() {
-      if (typeof firebase !== "undefined" && firebase.auth) {
-        firebase.auth().signOut().then(() => {
-          window.location.href = "login.html";
-        });
-      }
-    }
+    async function sendMessage() {
+      const question = input.value.trim();
+      if (!question) return;
 
-    function sendToRahl() {
-      const input = document.getElementById("userInput");
-      const chatBox = document.getElementById("chatBox");
-      const message = input.value.trim();
+      addMessage(question, "user");
+      input.value = "Thinking...";
 
-      if (!message) return;
+      const answer = await askRAHL(question);
 
-      chatBox.innerHTML += `<div class="user-msg">👤 You: ${message}</div>`;
-
-      const rahlReply = generateRahlResponse(message);
-      chatBox.innerHTML += `<div class="bot-msg">🤖 RAHL: ${rahlReply}</div>`;
-
-      speak(rahlReply);
       input.value = "";
+      addMessage(answer, "rahl");
+      speak(answer);
+    }
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
+      chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function generateRahlResponse(message) {
-      const text = message.toLowerCase().trim();
-
-      if (text.includes("fashion bio")) {
-        return "A fashion bio is a creative force driven by vision, passion, and purpose.";
-      }
-
-      if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
-        return "Greetings, I am RAHL — Royal Artificial Hyperintelligent Linguist. How can I serve you?";
-      }
-
-      if (text.includes("who created you")) {
-        return "I was created by Emperor Rahl, master of the code realm.";
-      }
-
-      if (text.includes("what can you do")) {
-        return "I can chat, generate bios, and soon evolve to full AI intelligence.";
-      }
-
-      return "I am still learning. But I will serve you with knowledge and code.";
-    }
-
     function speak(text) {
-      const speech = new SpeechSynthesisUtterance(text);
-      speech.lang = "en-US";
-      speech.rate = 1;
-      speechSynthesis.speak(speech);
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = speechSynthesis.getVoices().find(v => v.name.includes("Google") || v.name.includes("English"));
+      utterance.rate = 1;
+      speechSynthesis.speak(utterance);
     }
+
+    // Voice input
+    micBtn.addEventListener("click", () => {
+      const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.onresult = (event) => {
+        input.value = event.results[0][0].transcript;
+        sendMessage();
+      };
+      recognition.start();
+    });
   </script>
- <script src="openai.js"></script>
-<script src="app.js"></script>
+
 </body>
 </html>
