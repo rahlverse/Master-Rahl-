@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAHL Launchpad</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <title>👑 RAHL Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #2c003e, #000);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1a1a1a);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -19,102 +19,118 @@
       text-align: center;
     }
 
-    header {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+    .login-box {
+      background: #111;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
     }
 
-    .profile-icon {
-      font-size: 1.6em;
+    .login-box h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
       color: gold;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: #fff;
+    }
+
+    .login-box button {
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background-color: gold;
+      color: #111;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: background 0.3s ease;
     }
 
-    .profile-icon:hover {
-      transform: scale(1.2);
-    }
-
-    h1 {
-      font-size: 3em;
-      color: gold;
-      margin-bottom: 10px;
+    .login-box button:hover {
+      background-color: #ffcc00;
     }
 
     .typing {
-      font-size: 1.3em;
+      font-size: 14px;
       color: #ccc;
-      height: 30px;
-      margin-bottom: 30px;
+      margin-top: 10px;
+      min-height: 20px;
     }
 
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 80%;
-      max-width: 300px;
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') no-repeat center;
+      background-size: cover;
+      margin: 0 auto 20px;
+      border: 2px solid gold;
     }
 
-    button {
-      background: gold;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+    .slogan {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #aaa;
     }
 
-    button:hover {
-      background: #ffdd57;
-      transform: scale(1.05);
+    a {
+      color: gold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
     }
 
-    footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.9em;
-      color: #999;
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <a href="dashboard.html"><i class="fas fa-user-circle profile-icon"></i></a>
-  </header>
+  <div class="login-box">
+    <div class="profile-icon"></div>
+    <h2>Welcome to RAHL</h2>
+    <p class="typing" id="typingText"></p>
 
-  <h1>👑 RAHL Launchpad</h1>
-  <div class="typing" id="slogan"></div>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <button type="submit">Login</button>
+    </form>
 
-  <div class="button-group">
-    <a href="signup.html"><button>Sign Up</button></a>
-    <a href="index.html"><button>Login</button></a>
-    <a href="generator.html"><button>Launch Generator</button></a>
+    <a href="signup.html">Create new account</a>
   </div>
 
-  <footer>
-    Power through knowledge. Control through code.
-  </footer>
+  <div class="slogan">👑 A creative force driven by vision, passion, and purpose — Powered by RAHL.</div>
 
   <script>
-    const text = "Power through knowledge. Control through code.";
-    let index = 0;
-    const speed = 70;
-    const slogan = document.getElementById("slogan");
+    // Typing animation for slogan
+    const text = "“A creative force driven by vision, passion, and purpose.”";
+    let i = 0;
+    const speed = 50;
+    const typingEl = document.getElementById("typingText");
 
-    function type() {
-      if (index < text.length) {
-        slogan.innerHTML += text.charAt(index);
-        index++;
-        setTimeout(type, speed);
+    function typeWriter() {
+      if (i < text.length) {
+        typingEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
       }
     }
-    type();
+
+    typeWriter();
   </script>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
