@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RAHL Launchpad</title>
@@ -7,89 +10,110 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #1e1f2f, #3b1f47);
-      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
     }
+
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: #111;
+      border-bottom: 2px solid gold;
     }
+
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.8rem;
       color: gold;
     }
+
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
     }
+
     .nav-links a {
-      text-decoration: none;
       color: white;
+      text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
+
     .nav-links a:hover {
       color: gold;
     }
+
     .hero-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 4rem 1rem;
+      padding: 2rem;
     }
+
+    .tech-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-bottom: 2px solid gold;
+    }
+
+    .emperor-img {
+      width: 180px;
+      border-radius: 50%;
+      margin-top: -90px;
+      border: 5px solid gold;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .hero-content {
+      margin-top: 1rem;
+    }
+
     .hero-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
       color: gold;
     }
+
     .hero-content p {
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      margin: 0.5rem 0 1.5rem;
     }
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+
     .btn {
-      background-color: gold;
-      color: #1e1f2f;
+      display: inline-block;
       padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      background: gold;
+      color: black;
       border: none;
-      border-radius: 25px;
-      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.3s;
+      transition: background 0.3s;
     }
+
     .btn:hover {
-      background-color: #f7d774;
+      background: white;
     }
+
     footer {
+      margin-top: 2rem;
+      padding: 1rem;
       text-align: center;
-      padding: 2rem 1rem;
       background-color: #111;
-    }
-    .slogan {
+      color: gray;
       font-style: italic;
-      color: #ccc;
     }
-    .powered {
-      font-size: 0.9rem;
-      color: #777;
+
+    footer .powered {
+      color: gold;
     }
   </style>
-</head><body>
+</head>
+
+<body>
   <header>
     <nav class="navbar">
       <h1 class="logo">👑 RAHL</h1>
@@ -98,17 +122,30 @@
         <li><a href="login.html">Login</a></li>
       </ul>
     </nav>
-  </header>  <main class="hero-section">
+  </header>
+
+  <!-- Tech Image at Top -->
+  <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f" class="tech-image" alt="Tech Theme" />
+
+  <!-- Royal Emperor Image (You) -->
+  <div style="text-align: center;">
+    <img src="https://images.unsplash.com/photo-1612831455546-037f2e7e6c4f" class="emperor-img" alt="Royal Emperor" />
+  </div>
+
+  <!-- Hero Section -->
+  <main class="hero-section">
     <div class="hero-content">
       <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
       <p>Your personalized gateway to innovation, automation, and creative freedom.</p>
-      <div class="hero-buttons">
-        <a class="btn" href="generator.html">Open Generator</a>
-        <a class="btn" href="logout.html">Log Out</a>
-      </div>
+      <a class="btn" href="generator.html">Open Generator</a>
+      <a class="btn" href="login.html">Login</a>
     </div>
-  </main>  <footer>
+  </main>
+
+  <footer>
     <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
     <p class="powered">Powered by RAHL</p>
   </footer>
-</body></html>
+</body>
+
+</html>
