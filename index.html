@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RAHL Launchpad</title>
@@ -6,106 +8,78 @@
   <link rel="icon" href="logo.png" />
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #1e1e2f, #4b0082);
-      color: white;
+      padding: 0;
+      background: #0e0e0e;
+      color: #fff;
+      text-align: center;
     }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: rgba(0, 0, 0, 0.7);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: gold;
-    }
-    .nav-links li {
-      display: inline;
-      margin: 0 10px;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-    }
+
     .hero-section {
-      text-align: center;
-      padding: 3rem 1rem;
+      padding: 40px 20px;
     }
-    .hero-section img {
-      width: 250px;
+
+    .hero-image img {
+      width: 300px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      box-shadow: 0 0 20px #f00;
+      margin-bottom: 20px;
     }
-    .hero-content h2 {
-      margin-top: 1.5rem;
-      font-size: 2rem;
-      color: gold;
-    }
-    .hero-content p {
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-      color: #ccc;
-    }
-    .hero-buttons {
-      margin-top: 2rem;
-    }
-    .btn {
-      padding: 10px 20px;
-      margin: 0 10px;
-      background-color: gold;
-      color: black;
-      border: none;
-      border-radius: 25px;
+
+    .hero-buttons a {
+      margin: 10px;
+      padding: 12px 24px;
+      background: crimson;
+      color: white;
       text-decoration: none;
+      border-radius: 6px;
       font-weight: bold;
-      transition: background-color 0.3s;
+      transition: background 0.3s;
     }
-    .btn:hover {
-      background-color: #ffd700;
+
+    .hero-buttons a:hover {
+      background: darkred;
     }
-    footer {
-      margin-top: 4rem;
-      text-align: center;
-      padding: 1.5rem;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
+
     .slogan {
+      margin-top: 40px;
       font-style: italic;
-      color: #ccc;
+      color: #aaa;
     }
-    .powered {
-      margin-top: 0.5rem;
-      font-weight: bold;
-      color: gold;
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #888;
     }
   </style>
-</head><body>
+</head>
+<body>
+
   <header>
-    <nav class="navbar">
-      <h1 class="logo">👑 RAHL</h1>
-      <ul class="nav-links">
-        <li><a href="signup.html">Sign Up</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-    </nav>
-  </header>  <main class="hero-section">
-    <img src="emperor.jpg" alt="Royal Emperor">
-    <div class="hero-content">
-      <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
-      <p>Your personalized gateway to innovation, automation, and creative freedom.</p>
-      <div class="hero-buttons">
-        <a class="btn" href="generator.html">Open Generator</a>
-        <a class="btn" href="logout.html">Log Out</a>
-      </div>
+    <h1>👑 RAHL</h1>
+  </header>
+
+  <main class="hero-section">
+    <div class="hero-image">
+      <img src="lord-rahl.png" alt="Lord Rahl">
     </div>
-  </main>  <footer>
-    <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
-    <p class="powered">Powered by RAHL</p>
+    <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
+    <p>Your gateway to power, automation, and control through code.</p>
+
+    <div class="hero-buttons">
+      <a href="generator.html">Open Generator</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+
+    <p class="slogan">"Power Through Knowledge. Control Through Code."</p>
+  </main>
+
+  <footer>
+    <p>© 2025 RAHL | Built for the future.</p>
   </footer>
-</body></html>
+
+</body>
+</html>
