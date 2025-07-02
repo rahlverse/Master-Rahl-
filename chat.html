@@ -1,148 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Talk to RAHL 👑</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>RAHL Chat</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-      color: white;
       font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 100vh;
-      padding: 20px;
+      background: #0d0d0d;
+      color: white;
+      margin: 0;
+      padding: 0;
     }
 
-    h1 {
-      margin-top: 20px;
-      font-size: 1.8rem;
+    header {
+      background-color: #111;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5em;
+      color: gold;
+      border-bottom: 1px solid #222;
     }
 
-    #chatBox {
-      width: 100%;
-      max-width: 700px;
-      background: #1e1e2f;
+    #chatbox {
+      max-width: 600px;
+      margin: auto;
       padding: 20px;
-      border-radius: 12px;
-      margin: 20px 0;
       overflow-y: auto;
-      max-height: 50vh;
+      height: 70vh;
+      border-bottom: 1px solid #333;
     }
 
-    .message {
-      margin: 10px 0;
+    .msg {
       padding: 12px;
-      background-color: #2e2e4d;
-      border-radius: 8px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      line-height: 1.5;
     }
 
     .user {
+      background: #333;
+      align-self: flex-end;
       text-align: right;
-      color: #7de2d1;
+      margin-left: auto;
     }
 
     .rahl {
-      text-align: left;
-      color: #f7a1f7;
+      background: #222;
+      color: gold;
+      border-left: 4px solid gold;
     }
 
-    #inputArea {
+    #form {
       display: flex;
-      width: 100%;
-      max-width: 700px;
-      gap: 10px;
+      justify-content: center;
+      padding: 20px;
+      background: #111;
     }
 
-    input {
-      flex: 1;
-      padding: 14px;
-      border-radius: 10px;
+    #question {
+      width: 70%;
+      padding: 10px;
+      border-radius: 8px;
       border: none;
-      font-size: 1rem;
+      font-size: 16px;
     }
 
-    button {
-      background-color: #8a2be2;
-      color: white;
+    #askBtn {
+      margin-left: 10px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: gold;
       border: none;
-      padding: 14px 20px;
-      border-radius: 10px;
+      font-weight: bold;
       cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #a060f0;
-    }
-
-    #micBtn {
-      font-size: 1.2rem;
-      background-color: #333;
-      color: white;
     }
   </style>
 </head>
 <body>
 
-  <h1>RAHL is listening 👑</h1>
-  <div id="chatBox"></div>
+<header>👑 RAHL - Your Royal AI Assistant</header>
 
-  <div id="inputArea">
-    <input type="text" id="userInput" placeholder="Ask RAHL anything..." />
-    <button onclick="sendMessage()">Send</button>
-    <button id="micBtn">🎤</button>
-  </div>
+<div id="chatbox"></div>
 
-  <script src="openai.js"></script>
-  <script>
-    const input = document.getElementById("userInput");
-    const chatBox = document.getElementById("chatBox");
-    const micBtn = document.getElementById("micBtn");
+<div id="form">
+  <input type="text" id="question" placeholder="Ask RAHL anything..." />
+  <button id="askBtn">Ask</button>
+</div>
 
-    async function sendMessage() {
-      const question = input.value.trim();
-      if (!question) return;
-
-      addMessage(question, "user");
-      input.value = "Thinking...";
-
-      const answer = await askRAHL(question);
-
-      input.value = "";
-      addMessage(answer, "rahl");
-      speak(answer);
-    }
-
-    function addMessage(text, sender) {
-      const msg = document.createElement("div");
-      msg.classList.add("message", sender);
-      msg.textContent = text;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function speak(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.voice = speechSynthesis.getVoices().find(v => v.name.includes("Google") || v.name.includes("English"));
-      utterance.rate = 1;
-      speechSynthesis.speak(utterance);
-    }
-
-    // Voice input
-    micBtn.addEventListener("click", () => {
-      const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.onresult = (event) => {
-        input.value = event.results[0][0].transcript;
-        sendMessage();
-      };
-      recognition.start();
-    });
-  </script>
+<script src="openai.js"></script>
+<script src="chat.js"></script>
 
 </body>
 </html>
