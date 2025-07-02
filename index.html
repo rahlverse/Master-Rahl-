@@ -19,6 +19,23 @@
       text-align: center;
     }
 
+    header {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .profile-icon {
+      font-size: 1.6em;
+      color: gold;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.2);
+    }
+
     h1 {
       font-size: 3em;
       color: gold;
@@ -66,6 +83,10 @@
   </style>
 </head>
 <body>
+
+  <header>
+    <a href="dashboard.html"><i class="fas fa-user-circle profile-icon"></i></a>
+  </header>
 
   <h1>👑 RAHL Launchpad</h1>
   <div class="typing" id="slogan"></div>
