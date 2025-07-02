@@ -3,72 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard | RAHL Launchpad</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png" />
-  <style>
-    .dashboard-container {
-      max-width: 800px;
-      margin: 60px auto;
-      background: #111;
-      padding: 40px;
-      color: white;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      text-align: center;
-    }
-
-    .dashboard-container h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .dashboard-buttons a {
-      display: inline-block;
-      padding: 14px 28px;
-      margin: 15px;
-      background: royalblue;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .dashboard-buttons a:hover {
-      background: #4169e1;
-    }
-
-    .royal-frame {
-      border: 3px solid royalblue;
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      margin: 20px auto;
-      background-image: url('profile.png'); /* Optional future user profile */
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
+  <title>RAHL Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
-  <div class="dashboard-container">
-    <h2>👑 Welcome to Your Royal Dashboard</h2>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">👑 RAHL</h1>
+      <ul class="nav-links">
+        <li><button onclick="logout()">Logout</button></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="royal-frame"></div>
+  <main class="dashboard">
+    <h2>Upload Your PDF Notes</h2>
+    <input type="file" id="pdfFile" accept="application/pdf" />
+    <button onclick="uploadPDF()">Upload PDF</button>
 
-    <div class="dashboard-buttons">
-      <a href="generator.html">Open Generator</a>
-      <a href="index.html">Log Out</a>
-    </div>
+    <h3>Your Uploaded Files:</h3>
+    <ul id="pdfList"></ul>
+  </main>
 
-    <p class="powered">Powered by RAHL</p>
-  </div>
-
-  <script>
-    // Optional future user data fetch
-    console.log("Dashboard loaded.");
-  </script>
+  <script type="module" src="pdf-manager.js"></script>
 </body>
 </html>
