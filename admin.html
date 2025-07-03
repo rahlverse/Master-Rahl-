@@ -6,7 +6,17 @@
   <title>Admin Login - RAHL</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body><h2>📁 Upload PDF</h2>
+<input type="file" id="pdfUpload" accept="application/pdf" />
+<button id="uploadBtn">Upload PDF</button>
+
+<h3>📄 Available PDFs:</h3>
+<ul id="pdfList"></ul>
+
+<button id="logoutBtn">Logout</button>
+
+<!-- Link the admin.js file -->
+<script type="module" src="admin.js"></script>
   <div class="auth-container">
     <h2>👑 RAHL Admin Login</h2>
     <form id="adminLoginForm">
