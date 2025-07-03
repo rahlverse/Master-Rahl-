@@ -7,38 +7,6 @@
   <title>RAHL Launchpad</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="logo.png" />
-  <style>
-    .hero-image {
-      max-width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
-      margin-bottom: 20px;
-    }
-
-    .hero-section {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .hero-buttons {
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      margin: 5px;
-      background-color: #000;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background-color: #333;
-    }
-  </style>
 </head>
 
 <body>
@@ -46,20 +14,20 @@
     <nav class="navbar">
       <h1 class="logo">👑 RAHL</h1>
       <ul class="nav-links">
-        <li><a href="signup.html">Sign Up</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a class="btn" href="signup.html" id="signupBtn">Sign Up</a></li>
+        <li><a class="btn" href="login.html" id="loginBtn">Login</a></li>
+        <li><a class="btn" href="logout.html" id="logoutBtn" style="display: none;">Log Out</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="hero-section">
-    <img src="images/lord-rahl.png" alt="Lord Rahl" class="hero-image" />
     <div class="hero-content">
+      <img src="images/lord-rahl.png" alt="Lord Rahl" class="hero-image" />
       <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
       <p>Your personalized gateway to innovation, automation, and creative freedom.</p>
       <div class="hero-buttons">
-        <a class="btn" href="generator.html">Open Generator</a>
-        <a class="btn" href="logout.html">Log Out</a>
+        <a class="btn" href="generator.html" id="generatorBtn" style="display: none;">Open Generator</a>
       </div>
     </div>
   </main>
@@ -68,6 +36,35 @@
     <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
     <p class="powered">Powered by RAHL</p>
   </footer>
+
+  <!-- Firebase Auth State Handling -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const generatorBtn = document.getElementById("generatorBtn");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+        generatorBtn.style.display = "inline-block";
+      } else {
+        loginBtn.style.display = "inline-block";
+        signupBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+        generatorBtn.style.display = "none";
+      }
+    });
+  </script>
 </body>
 
 </html>
