@@ -1,0 +1,24 @@
+<!-- admin-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RAHL Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>RAHL Admin Panel</h1>
+    <button onclick="logoutAdmin()">Logout</button>
+  </header>
+
+  <main>
+    <h2>Manage Uploaded PDFs</h2>
+    <input type="file" id="pdfUpload" accept=".pdf">
+    <button onclick="uploadPDF()">Upload PDF</button>
+    <ul id="pdfList"></ul>
+  </main>
+
+  <script type="module" src="admin-dashboard.js"></script>
+</body>
+</html>
