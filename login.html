@@ -3,85 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login | RAHL Launchpad</title>
+  <title>Login - RAHL Launchpad</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png" />
-  <style>
-    .login-container {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 30px;
-      background: #111;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      color: #fff;
-      text-align: center;
-    }
-
-    .login-container h2 {
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-    }
-
-    .login-container input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-    }
-
-    .login-container label {
-      float: left;
-      margin-top: 10px;
-    }
-
-    .login-container button {
-      width: 100%;
-      padding: 12px;
-      background: royalblue;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      margin-top: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .login-container p {
-      margin-top: 20px;
-    }
-
-    .typing-animation {
-      font-family: 'Courier New', monospace;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 3s steps(40, end) forwards;
-      border-right: 3px solid royalblue;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-  </style>
 </head>
-
 <body>
-  <div class="login-container">
-    <h2 class="typing-animation">Welcome Back to the Royal Realm</h2>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      
-      <label><input type="checkbox" id="keepLoggedIn" /> Keep me logged in</label>
-      
-      <button type="submit">Login</button>
+  <div class="auth-container">
+    <h1 class="logo">👑 RAHL Login</h1>
+    <form id="loginForm" class="auth-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <input type="password" id="password" placeholder="Enter your password" required />
+      <button type="submit" class="btn">Login</button>
+      <p class="link-text">Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
-    <p>Don't have an account? <a href="signup.html" style="color: royalblue;">Sign up</a></p>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <footer>
+    <p class="powered">Powered by RAHL</p>
+  </footer>
+
+  <!-- Firebase Login Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = form["email"].value;
+      const password = form["password"].value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+  </script>
 </body>
 </html>
