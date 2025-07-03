@@ -4,27 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RAHL Dashboard</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <nav class="navbar">
       <h1 class="logo">👑 RAHL</h1>
       <ul class="nav-links">
-        <li><button onclick="logout()">Logout</button></li>
+        <li><a href="#" id="logoutBtn">Logout</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="dashboard">
-    <h2>Upload Your PDF Notes</h2>
-    <input type="file" id="pdfFile" accept="application/pdf" />
-    <button onclick="uploadPDF()">Upload PDF</button>
-
-    <h3>Your Uploaded Files:</h3>
-    <ul id="pdfList"></ul>
+    <h2>Welcome back to your Launchpad!</h2>
+    <p>Here you can generate bios, captions, and more using RAHL.</p>
+    <div class="dashboard-buttons">
+      <a href="generator.html" class="btn">Open Generator</a>
+    </div>
   </main>
 
-  <script type="module" src="pdf-manager.js"></script>
+  <footer>
+    <p class="powered">Powered by RAHL</p>
+  </footer>
+
+  <!-- Firebase Auth Logout Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Show dashboard only if logged in
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Logout handler
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    });
+  </script>
 </body>
 </html>
