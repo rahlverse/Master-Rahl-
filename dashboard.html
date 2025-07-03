@@ -17,39 +17,71 @@
   </header>
 
   <main class="dashboard">
-    <h2>Welcome back to your Launchpad!</h2>
-    <p>Here you can generate bios, captions, and more using RAHL.</p>
-    <div class="dashboard-buttons">
-      <a href="generator.html" class="btn">Open Generator</a>
-    </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAHL Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <h1 class="logo">👑 RAHL</h1>
+    <ul class="nav-links">
+      <li><a href="generator.html">Open Generator</a></li>
+      <li><a href="#" id="logoutBtn">Log Out</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard">
+    <section class="welcome">
+      <h2>Welcome to Your Royal Dashboard</h2>
+      <p>Here are the PDFs you've uploaded or shared with your court.</p>
+    </section>
+
+    <section class="pdf-list-section">
+      <h3>📄 Available PDFs:</h3>
+      <ul id="pdfList" class="pdf-list"></ul>
+    </section>
   </main>
 
   <footer>
-    <p class="powered">Powered by RAHL</p>
+    <p class="slogan">"Ruled by Knowledge, Powered by RAHL."</p>
   </footer>
 
-  <!-- Firebase Auth Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import { firebaseConfig } from "./firebase-config.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { firebaseConfig } from './firebase-config.js';
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    // Show dashboard only if logged in
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
-
-    // Logout handler
     const logoutBtn = document.getElementById("logoutBtn");
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
+    logoutBtn.addEventListener("click", () => {
       signOut(auth).then(() => {
         window.location.href = "login.html";
+      });
+    });
+
+    const pdfList = document.getElementById("pdfList");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Fetch PDFs
+      const querySnapshot = await getDocs(collection(db, "pdfs"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${data.url}" target="_blank">${data.name}</a>`;
+        pdfList.appendChild(li);
       });
     });
   </script>
