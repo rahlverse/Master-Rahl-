@@ -1,70 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RAHL Launchpad</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png" />
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="logo.png"/>
 </head>
-
 <body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">👑 RAHL</h1>
-      <ul class="nav-links">
-        <li><a class="btn" href="signup.html" id="signupBtn">Sign Up</a></li>
-        <li><a class="btn" href="login.html" id="loginBtn">Login</a></li>
-        <li><a class="btn" href="logout.html" id="logoutBtn" style="display: none;">Log Out</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="container">
+    <h1 class="brand">👑 RAHL</h1>
 
-  <main class="hero-section">
-    <div class="hero-content">
-      <img src="images/lord-rahl.png" alt="Lord Rahl" class="hero-image" />
-      <h2>Welcome to the Royal AI Hyperlaunchpad</h2>
-      <p>Your personalized gateway to innovation, automation, and creative freedom.</p>
-      <div class="hero-buttons">
-        <a class="btn" href="generator.html" id="generatorBtn" style="display: none;">Open Generator</a>
-      </div>
+    <!-- Hacking-themed Image -->
+    <img src="https://i.imgur.com/DO6nqra.jpg" alt="Hacker Theme" class="hero-image" />
+
+    <!-- Buttons -->
+    <div class="auth-buttons">
+      <a href="signup.html" class="btn">Sign Up</a>
+      <a href="login.html" class="btn">Login</a>
     </div>
-  </main>
 
-  <footer>
-    <p class="slogan">"A creative force driven by vision, passion, and purpose."</p>
-    <p class="powered">Powered by RAHL</p>
-  </footer>
+    <!-- Slogan -->
+    <p class="slogan">Power through knowledge. Control through code.</p>
+  </div>
 
-  <!-- Firebase Auth State Handling -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import { firebaseConfig } from "./firebase-config.js";
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const generatorBtn = document.getElementById("generatorBtn");
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        loginBtn.style.display = "none";
-        signupBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-        generatorBtn.style.display = "inline-block";
-      } else {
-        loginBtn.style.display = "inline-block";
-        signupBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-        generatorBtn.style.display = "none";
-      }
-    });
-  </script>
 </body>
-
 </html>
